@@ -109,7 +109,7 @@ class retrieveDataController extends Controller
         $schemeDetails = SchemeDetails::get();
         //dd($subject->topic);
         foreach($subject->topic as $topic){
-            $plans = PlanScheme::where('topic_id', $topic->id)->with('topic')->get();
+            $plans = PlanScheme::where('topic_id', $topic->id)->with('topic')->latest()->get();
            // dd($topic->id);
         }
 
