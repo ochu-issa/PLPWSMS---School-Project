@@ -74,9 +74,9 @@
                                     <td>
                                         @if ($schemeDetail = $schemeDetails->where('topic_id', $topic->id)->first())
                                             From: <span
-                                                class="badge badge-primary">{{ \Carbon\Carbon::parse($schemeDetail->from_Date)->format('d . m . Y') }}</span>
+                                                class="badge badge-primary">{{ \Carbon\Carbon::parse($schemeDetail->from_Date)->format('d . m . Y') ?? 'null' }}</span>
                                             To: <span
-                                                class="badge badge-primary">{{ \Carbon\Carbon::parse($schemeDetail->to_Date)->format('d . m . Y') }}</span>
+                                                class="badge badge-primary">{{ \Carbon\Carbon::parse($schemeDetail->to_Date)->format('d . m . Y') ?? 'null'}}</span>
                                         @else
                                             <span class="badge badge-warning">Create Learning Period</span>
                                         @endif
@@ -88,11 +88,17 @@
                                     </td>
                                     <td>
                                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                                        data-target="#addplan{{ $topic->id }}"><span
-                                                class="fa fa-plus"></span> add plan</button>
+                                            data-target="#addplan{{ $topic->id }}"><span class="fa fa-plus"></span> add
+                                            plan</button>
                                     </td>
                                 </tr>
-                                @include('planModalview')
+                                {{-- @include('planModalview') --}}
+                                <div class="modal fade" id="viewplan{{ $topic->id }}" tabindex="-1" role="dialog" aria-labelledby="viewplanLabel{{ $topic->id }}" aria-hidden="true">
+                                    @include('planModalview', ['topic' => $topic, 'plans' => $plans->where('topic_id', $topic->id)])
+                                </div>
+
+                                @include('planModalAdd')
+                                
                             @endforeach
                         </tbody>
                     </table>

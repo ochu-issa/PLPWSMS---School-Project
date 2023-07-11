@@ -76,7 +76,7 @@ class retrieveDataController extends Controller
         if (!Auth::user()->hasRole(['Super-Admin'])) {
             return back()->with('error', 'You are not authorized to open this page');
         }
-        $academimaster = User::role(['Academic-Master', 'Super-Admin'])->latest()->get();
+        $academimaster = User::role(['Academic-Master', 'Super-Admin'])->where('id', '!=', Auth::user()->id)->latest()->get();
         return view('academimaster', ['academicmasters' => $academimaster]);
     }
 
@@ -105,14 +105,15 @@ class retrieveDataController extends Controller
     public function planDetails($id)
     {
         $scheme = LessonScheme::findOrFail($id);
-        $subject = Subject::with('topic')->find($scheme->subject_id);
-        $schemeDetails = SchemeDetails::get();
-        //dd($subject->topic);
-        foreach($subject->topic as $topic){
-            $plans = PlanScheme::where('topic_id', $topic->id)->with('topic')->latest()->get();
-           // dd($topic->id);
+        $subject = Subject::where('id', $scheme->subject_id)->with('topic')->first();
+        //dd($subject);
+        $plans = collect(); // Initialize an empty collection
+
+        foreach ($subject->topic as $topic) {
+            $plans = $plans->merge(PlanScheme::where('topic_id', $topic->id)->with('topic')->latest()->get());
         }
 
+        $schemeDetails = SchemeDetails::get();
 
         return view('planDetails', [
             'scheme' => $scheme,
