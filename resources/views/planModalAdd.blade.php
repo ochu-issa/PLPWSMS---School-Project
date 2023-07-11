@@ -10,7 +10,7 @@
                 </button>
             </div>
             <div class="modal-body">
-
+                {{-- optional method --}}
                 @if ($schemeDetail = $schemeDetails->where('topic_id', $topic->id)->first())
                     <label for="">learning Period</label> :
                     From: <span
