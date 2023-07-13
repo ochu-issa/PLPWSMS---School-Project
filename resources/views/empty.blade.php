@@ -31,12 +31,10 @@
         </script>
     @endif
 
-    <!-- /.content-header -->
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            {{-- codes comes here --}}
-            <livewire:home>
+            {{-- code comes here --}}
         </div>
     </section>
 @endsection

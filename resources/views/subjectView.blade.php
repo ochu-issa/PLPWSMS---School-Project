@@ -4,13 +4,13 @@
 
 @endsection
 
-@section('script-subject')
-    <script>
-        window.addEventListener('close-modal', event => {
-            $('#addsubject').modal('hide');
-            $('#updatesubject').modal('hide');
-            $('#deletesubject').modal('hide');
-        })
-    </script>
-@endsection
+    @section('script-subject')
+        <script>
+            window.addEventListener('close-modal', event => {
+                $('#addsubject').modal('hide');
+                $('#updatesubject').modal('hide');
+                $('#deletesubject').modal('hide');
+            })
+        </script>
+    @endsection
 

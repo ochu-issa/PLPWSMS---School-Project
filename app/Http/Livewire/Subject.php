@@ -22,18 +22,17 @@ class Subject extends Component
             'subjectname' => [
                 'required',
                 'string',
-                (new Unique('subjects'))->ignore($this->subject_id, 'id'),
             ],
             'std' => ['required', 'string'],
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'subjectname.unique' => 'The subject name is already exists.',
-        ];
-    }
+    // public function messages()
+    // {
+    //     return [
+    //         'subjectname.unique' => 'The subject name is already exists.',
+    //     ];
+    // }
 
     //update
     public function updated($fields)

@@ -51,7 +51,6 @@
 </div>
 {{-- end of modal --}}
 
-
 <!-- Update - Modal -->
 <div wire:ignore.self class="modal fade" id="updatesubject" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -64,7 +63,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form wire:submit.prevent="updateSubject">
+                <form wire:submit.prevent="updateSubject" method="post">
                     <div class="row">
                         <div class="col-md-12">
                             <label for="Enter Subject Name...">Enter Subject Name</label>
